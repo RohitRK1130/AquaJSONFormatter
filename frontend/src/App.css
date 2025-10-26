@@ -1,0 +1,248 @@
+:root{
+  --ocean-1: #06283d;
+  --ocean-2: #0ea5a4;
+  --ocean-3: #06b6d4;
+  --muted: #9fb3c8;
+  --accent: #7dd3fc;
+}
+
+/* core */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg, var(--ocean-1) 0%, #083b4a 40%, #071a2b 100%);
+  color:#e6f6fb;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* waves */
+.ocean-bg{ position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden }
+.wave{ position:absolute; left:-10%; right:-10%; height:220px; bottom:-60px; opacity:0.12; background:linear-gradient(90deg, rgba(14,165,164,0.2), rgba(6,182,212,0.18)); filter:blur(24px); transform:rotate(0.001deg); }
+.wave1{ animation: floatx 12s linear infinite; border-radius:40% }
+.wave2{ bottom:-120px; opacity:0.08; height:280px; animation: floatx 18s linear infinite reverse; border-radius:30% }
+@keyframes floatx { 0%{ transform: translateX(-8%) } 50%{ transform: translateX(8%) } 100%{ transform: translateX(-8%) } }
+
+/* topbar */
+.topbar{ display:flex; justify-content:space-between; align-items:center; padding:18px 28px; position:relative; z-index:2 }
+.brand{ display:flex; gap:12px; align-items:center }
+.brand-text .title{ font-weight:700; font-size:18px; color:var(--accent) }
+.brand-text .subtitle{ font-size:12px; color:var(--muted) }
+
+/* container & card */
+.container{ max-width:1100px; margin:18px auto; padding:0 20px; position:relative; z-index:2 }
+.card{ background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border-radius:14px; padding:18px; box-shadow: 0 8px 40px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.04) }
+
+/* controls */
+.controls{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:14px }
+.left{ display:flex; gap:18px; align-items:center }
+
+/* segmented control for indent */
+.segmented{ display:flex; padding:4px; gap:6px; background: rgba(255,255,255,0.02); border-radius:10px; align-items:center }
+.seg-btn{
+  position:relative;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  transition: color 0.18s ease;
+  min-width:54px;
+  text-align:center;
+}
+.seg-btn:hover{ color:var(--accent) }
+.seg-btn.active{ color:#00313a; font-weight:700; }
+.seg-indicator{ position:absolute; inset:0; border-radius:8px; background: linear-gradient(90deg, var(--ocean-3), var(--ocean-2)); z-index:-1; opacity:0.18; pointer-events:none; }
+
+/* toggle row */
+.toggle-row{ display:flex; align-items:center; gap:10px }
+.toggle-label{ color:var(--muted); font-size:14px }
+
+/* switch */
+.toggle-switch{ width:54px; height:28px; position:relative; display:inline-flex; align-items:center; cursor:pointer; }
+.toggle-track{ position:absolute; inset:0; border-radius:999px; background:rgba(255,255,255,0.06); box-shadow: inset 0 1px 0 rgba(255,255,255,0.02); }
+.toggle-thumb{ width:22px; height:22px; border-radius:99px; background:white; margin-left:3px; box-shadow: 0 6px 18px rgba(6,182,212,0.12); }
+
+/* actions */
+.actions{ display:flex; gap:10px; align-items:center }
+
+/* buttons */
+.btn{ border:0; padding:8px 12px; border-radius:8px; background:transparent; color:var(--accent); cursor:pointer; font-weight:700; font-size:14px }
+.btn.small{ padding:6px 10px; font-size:13px }
+.btn.primary{ background:linear-gradient(90deg,var(--ocean-3),var(--ocean-2)); color:#00313a; box-shadow: 0 6px 18px rgba(6,182,212,0.12) }
+.btn.ghost{ background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.03); padding:7px 10px }
+
+/* editor layout */
+.editor-row{ display:flex; gap:12px; align-items:stretch; margin-top:6px }
+.pane{ flex:1; display:flex; flex-direction:column; border-radius:10px; overflow:hidden; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008)); border:1px solid rgba(255,255,255,0.02) }
+.pane-header{ display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid rgba(255,255,255,0.02) }
+.muted{ color:var(--muted); font-size:13px }
+
+/* editor and output */
+.editor{ width:100%; height:360px; padding:14px; border:0; resize:vertical; outline:none; font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace; font-size:13px; color:#e6f6fb; background:transparent }
+.result, .error{ padding:12px; margin:12px; border-radius:8px; height:300px; overflow:auto; white-space:pre-wrap; font-family:ui-monospace, monospace }
+
+/* wrap / nowrap classes */
+.result.nowrap, .error.nowrap {
+  white-space: pre;
+  overflow: auto;
+  word-break: normal;
+}
+.result.wrap, .error.wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* visuals */
+.result{ background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.5)); border:1px solid rgba(255,255,255,0.03) }
+.error{ background:linear-gradient(180deg, rgba(96,16,16,0.12), rgba(96,16,16,0.06)); border:1px solid rgba(96,16,16,0.2); color:#ffdddd }
+
+/* toolbar */
+.toolbar{ display:flex; gap:8px; align-items:center }
+.copy-btn, .replace-btn, .wrap-toggle{
+  appearance:none;
+  border:0;
+  background: linear-gradient(90deg, var(--ocean-3), var(--ocean-2));
+  color:#00313a;
+  font-weight:700;
+  border-radius:8px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-size:13px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 6px 16px rgba(6, 182, 212, 0.14);
+}
+.wrap-toggle.on { background: linear-gradient(90deg, #34d399, #06b6d4); }
+.wrap-toggle.off { background: rgba(255,255,255,0.04); color:var(--muted); box-shadow:none; border:1px solid rgba(255,255,255,0.02); }
+.copy-btn:hover:not(:disabled), .replace-btn:hover:not(:disabled), .wrap-toggle:hover:not(:disabled){
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(6, 182, 212, 0.18);
+}
+.copy-btn:disabled, .replace-btn:disabled{
+  opacity:0.45;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+
+/* empty placeholder */
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 240px;
+  text-align: center;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px;
+  margin: 16px;
+  padding: 24px;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  box-shadow: inset 0 0 10px rgba(6, 182, 212, 0.05);
+  transition: all 0.3s ease-in-out;
+}
+.empty strong { color: var(--accent); transition: color 0.25s; }
+.empty:hover strong { color: #38e0ff; }
+
+/* fullscreen overlay */
+.fullscreen-overlay{
+  position:fixed;
+  inset:0;
+  background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.8));
+  z-index:9998;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+}
+.fullscreen-card{
+  width:100%;
+  max-width:1400px;
+  height:86vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:12px;
+  box-shadow: 0 40px 120px rgba(2,6,23,0.7);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  border:1px solid rgba(255,255,255,0.04);
+}
+.fs-header{ display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid rgba(255,255,255,0.02) }
+.fs-title{ font-weight:700; color:var(--accent) }
+.fs-actions{ display:flex; gap:8px; align-items:center }
+.fs-body{ flex:1; padding:16px; overflow:auto }
+
+/* toast */
+.toast{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  background: linear-gradient(90deg,var(--ocean-3),var(--ocean-2));
+  color:#00313a;
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:700;
+  box-shadow:0 8px 30px rgba(6,182,212,0.12);
+  z-index:9999;
+}
+
+/* responsive */
+@media (max-width:900px){
+  .editor-row{ flex-direction:column }
+  .editor{ height:260px }
+  .result, .error{ height:200px }
+  .fullscreen-card{ height:92vh; max-width:calc(100% - 28px) }
+}
+
+/* fullscreen body should layout as a column so the pre can expand */
+.fs-body{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  overflow: hidden; /* allow internal scroll only on pre */
+}
+
+/* make result/error flexible and remove outer margins when in fullscreen */
+.fullscreen-card .result,
+.fullscreen-card .error {
+  margin: 0;
+  padding: 14px;
+  border-radius: 8px;
+  flex: 1 1 auto;       /* grow to fill available space */
+  min-height: 0;        /* critical for flex children to allow scrolling */
+  overflow: auto;       /* scroll inside the pre if content is long */
+  white-space: pre-wrap; /* keep wrap state controlled by classes (wrap/nowrap may override) */
+}
+
+/* keep same visual styles but without fixed heights */
+.fullscreen-card .result {
+  background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.5));
+  border: 1px solid rgba(255,255,255,0.03);
+  color: #e6f6fb;
+}
+
+.fullscreen-card .error {
+  background: linear-gradient(180deg, rgba(96,16,16,0.12), rgba(96,16,16,0.06));
+  border: 1px solid rgba(96,16,16,0.2);
+  color: #ffdddd;
+}
+
+/* keep wrap/nowrap classes working inside fullscreen too */
+.fullscreen-card .result.nowrap, 
+.fullscreen-card .error.nowrap {
+  white-space: pre;
+  overflow: auto;
+  word-break: normal;
+}
+.fullscreen-card .result.wrap, 
+.fullscreen-card .error.wrap {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
