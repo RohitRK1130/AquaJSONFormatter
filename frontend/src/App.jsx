@@ -116,11 +116,11 @@ export default function App() {
           </div>
         </div>
 
-        <nav className="nav-actions">
+        {/* <nav className="nav-actions">
           <button className="ghost" onClick={() => alert('Docs coming soon')}>Docs</button>
           <button className="ghost" onClick={() => alert('About coming soon')}>About</button>
           <button className="btn small" onClick={() => alert('Pro feature coming soon')}>Upgrade</button>
-        </nav>
+        </nav> */}
       </header>
 
       <main className="container">
