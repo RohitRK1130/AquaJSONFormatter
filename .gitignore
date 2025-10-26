@@ -1,2 +1,5 @@
 venv
 backend/db.sqlite3
+static/
+backend/formatter_app/migrations/*
+backend/backend/*
